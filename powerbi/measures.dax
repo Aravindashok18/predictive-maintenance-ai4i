@@ -1,0 +1,20 @@
+-- Measures for the report. Table names match the CSV file names in this folder.
+
+Machines        = COUNTROWS ( fact_machines )
+Failures        = SUM ( fact_machines[failure] )
+Failure Rate    = DIVIDE ( [Failures], [Machines] )
+
+Flagged         = SUM ( fact_machines[flagged] )
+Caught          = CALCULATE ( COUNTROWS ( fact_machines ), fact_machines[flagged] = 1, fact_machines[failure] = 1 )
+Missed          = [Failures] - [Caught]
+False Alarms    = [Flagged] - [Caught]
+
+Recall          = DIVIDE ( [Caught], [Failures] )
+Precision       = DIVIDE ( [Caught], [Flagged] )
+F1              = DIVIDE ( 2 * [Precision] * [Recall], [Precision] + [Recall] )
+
+Avg Risk        = AVERAGE ( fact_machines[failure_risk] )
+High Risk Share = DIVIDE ( CALCULATE ( COUNTROWS ( fact_machines ), fact_machines[failure_risk] >= 0.5 ), [Machines] )
+
+-- Count by failure mode (uses the unpivoted table)
+Mode Events     = COUNTROWS ( fact_failure_modes )

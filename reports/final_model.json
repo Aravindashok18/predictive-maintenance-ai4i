@@ -1,0 +1,27 @@
+{
+  "feature_set": "engineered+wear",
+  "features": [
+    "air_temp_k",
+    "process_temp_k",
+    "rpm",
+    "torque_nm",
+    "tool_wear_min",
+    "type_L",
+    "type_M",
+    "type_H",
+    "power_w",
+    "temp_diff_k",
+    "wear_torque"
+  ],
+  "threshold": 0.38760000467300415,
+  "params": {
+    "colsample_bytree": 0.7970070775275455,
+    "learning_rate": 0.03393544644394273,
+    "max_depth": 6,
+    "min_child_weight": 3,
+    "n_estimators": 103,
+    "reg_lambda": 0.11184895551664502,
+    "scale_pos_weight": 1,
+    "subsample": 0.6174415087017735
+  }
+}
